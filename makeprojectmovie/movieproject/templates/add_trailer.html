@@ -1,0 +1,261 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600%7CUbuntu:300,400,500,700" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-grid.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nouislider.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/plyr.css' %}">
+    <link rel="stylesheet" href="{% static 'css/photoswipe.css' %}">
+    <link rel="stylesheet" href="{% static 'css/default-skin.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="{% static 'icon/favicon-32x32.png' %}" sizes="32x32">
+    <link rel="apple-touch-icon" href="{% static 'icon/favicon-32x32.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'icon/apple-touch-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'icon/apple-touch-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'icon/apple-touch-icon-144x144.png' %}">
+
+    <style>
+        /* main.css */
+        .alert-success-custom {
+            color: white;
+            background-color: #28a745;
+            /* You can adjust the background color if needed */
+            border-color: #28a745;
+        }
+      
+    /* Style for form */
+    #add-trailer-form {
+        background-color: #25252b; /* Set background color */
+        color: white; /* Set text color */
+        padding: 20px; /* Add padding */
+    }
+
+    /* Style for label tags */
+    label {
+        color: white; /* Set label text color */
+    }
+
+    /* Style for form fields */
+    input[type="text"],
+    select,
+    textarea {
+        /* Add your custom styles here */
+        width: 100%; /* Example: Set width to 100% */
+        padding: 10px; /* Example: Add padding */
+        margin-bottom: 10px; /* Example: Add margin */
+    }
+
+    /* Add more styles as needed */
+
+    </style>
+
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Dmitry Volkov">
+    <title>FlixGo – Online Movies, TV Shows & Cinema HTML Template</title>
+
+</head>
+<body class="body">
+    <!-- header -->
+    <header class="header">
+        <div class="header__wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="header__content">
+                            <!-- header logo -->
+                            <a href="{% url 'home_view' %}" class="header__logo">
+                                <img src="{% static 'img/logo.svg' %}" alt="">
+                            </a>
+                            <!-- end header logo -->
+                            <!-- header nav -->
+                            <li class="header__nav-item">
+                                <a href="{% url 'home_view' %}" class="header__nav-link">Home</a>
+                            </li>
+                            <li class="header__nav-item">
+                                <a href="{% url 'add_trailer' %}" class="header__nav-link">Add Movies</a>
+                            </li>
+                                     
+                            <li class="header__nav-item">
+                                <a href="{% url 'category' %}" class="header__nav-link">Category</a>
+                            </li>
+                            
+                                <li class="header__nav-item">
+                                    <a href="{% url 'profile_view' %}" class="header__nav-link">Profile</a>
+                                </li>
+                         
+                            
+                            </ul>
+                            <!-- end header nav -->
+<!-- header auth -->
+<div class="header__auth">
+    {% if username %}
+        <span style="color: rgb(247, 22, 60);">Logged in as: </span>
+        <div></div>
+        <span style="color: white;">{{ username }}</span>
+    {% else %}
+        <span>Not logged in</span>
+    {% endif %}
+    <a href="{% url 'logout' %}" class="header__sign-in" id="logoutButton">
+        <i class="icon ion-ios-log-in"></i>
+        <span>Logout</span>
+    </a>
+</div>
+<!-- end header auth -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header search -->
+            <form action="#" class="header__search">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="header__search-content">
+                                <input type="text" placeholder="Search for a movie, TV Series that you are looking for">
+                                <button type="button">search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- end header search -->
+        </header>
+        <!-- end header -->
+
+    <!-- Main content -->
+<div class="container">
+    <h1 style="color: white;">Movies of the Month</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Add New Trailer</h2>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            <form method="post" enctype="multipart/form-data" id="add-trailer-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.title.label_tag }}
+                    {{ form.title }}
+                </div>
+                <div class="form-group">
+                    {{ form.category.label_tag }}
+                    {{ form.category }}
+                </div>
+                <div class="form-group">
+                    {{ form.cover_image.label_tag }}
+                    {{ form.cover_image }}
+                </div>
+                <div class="form-group">
+                    {{ form.rating.label_tag }}
+                    {{ form.rating }}
+                </div>
+                <div class="form-group">
+                    {{ form.description.label_tag }}
+                    {{ form.description }}
+                </div>
+                <div class="form-group">
+                    {{ form.poster_image.label_tag }}
+                    {{ form.poster_image }}
+                </div>
+                <div class="form-group">
+                    {{ form.full_details.label_tag }}
+                    {{ form.full_details }}
+                </div>
+                <div class="form-group">
+                    {{ form.cast.label_tag }}
+                    {{ form.cast }}
+                </div>
+                <div class="form-group">
+                    {{ form.release_date.label_tag }}
+                    {{ form.release_date }}
+                </div>
+                <div class="form-group">
+                    {{ form.youtube_trailer_link.label_tag }}
+                    {{ form.youtube_trailer_link }}
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 10px; margin-top: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">Add Trailer</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</div>
+<!-- Additional cards can be added here -->
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- end home -->
+
+<!-- footer -->
+<footer class="footer">
+<div class="container">
+<div class="row">
+<div class="col-12">
+<div class="footer__copyright">
+<small><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></small>
+<ul>
+    <li><a href="#">Terms of Use</a></li>
+    <li><a href="#">Privacy Policy</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<!-- end footer -->
+
+<!-- JavaScript -->
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/jquery.mousewheel.min.js' %}"></script>
+<script src="{% static 'js/jquery.mCustomScrollbar.min.js' %}"></script>
+<script src="{% static 'js/wNumb.js' %}"></script>
+<script src="{% static 'js/nouislider.min.js' %}"></script>
+<script src="{% static 'js/plyr.min.js' %}"></script>
+<script src="{% static 'js/jquery.morelines.min.js' %}"></script>
+<script src="{% static 'js/photoswipe.min.js' %}"></script>
+<script src="{% static 'js/photoswipe-ui-default.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>
+
+<!-- JavaScript for logout confirmation popup -->
+<script>
+    document.getElementById("logoutButton").addEventListener("click", function(event) {
+        event.preventDefault(); // Prevent the default action (following the link)
+
+        // Show confirmation dialog
+        if (confirm("Are you sure you want to logout?")) {
+            // If user confirms, proceed with logout
+            window.location.href = "{% url 'signout' %}"; // Redirect to logout URL
+        }
+    });
+</script>

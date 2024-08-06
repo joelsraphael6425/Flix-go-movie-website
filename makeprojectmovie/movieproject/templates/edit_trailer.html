@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600%7CUbuntu:300,400,500,700" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-grid.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nouislider.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/plyr.css' %}">
+    <link rel="stylesheet" href="{% static 'css/photoswipe.css' %}">
+    <link rel="stylesheet" href="{% static 'css/default-skin.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="{% static 'icon/favicon-32x32.png' %}" sizes="32x32">
+    <link rel="apple-touch-icon" href="{% static 'icon/favicon-32x32.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'icon/apple-touch-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'icon/apple-touch-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'icon/apple-touch-icon-144x144.png' %}">
+
+    <style>
+        /* main.css */
+        .alert-success-custom {
+            color: white;
+            background-color: #28a745;
+            /* You can adjust the background color if needed */
+            border-color: #28a745;
+        }
+      
+    /* Style for form */
+    #add-trailer-form {
+        background-color: #25252b; /* Set background color */
+        color: white; /* Set text color */
+        padding: 20px; /* Add padding */
+    }
+
+    /* Style for label tags */
+    label {
+        color: white; /* Set label text color */
+    }
+
+    /* Style for form fields */
+    input[type="text"],
+    select,
+    textarea {
+        /* Add your custom styles here */
+        width: 100%; /* Example: Set width to 100% */
+        padding: 10px; /* Example: Add padding */
+        margin-bottom: 10px; /* Example: Add margin */
+    }
+
+    /* Add more styles as needed */
+
+    </style>
+
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Dmitry Volkov">
+    <title>FlixGo – Online Movies, TV Shows & Cinema HTML Template</title>
+
+</head>
+<body class="body">
+    <!-- header -->
+    <header class="header">
+        <div class="header__wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="header__content">
+                            <!-- header logo -->
+                            <a href="{% url 'home_view' %}" class="header__logo">
+                                <img src="{% static 'img/logo.svg' %}" alt="">
+                            </a>
+                            <!-- end header logo -->
+                            <!-- header nav -->
+                            <li class="header__nav-item">
+                                <a href="{% url 'home_view' %}" class="header__nav-link">Home</a>
+                            </li>
+                            <li class="header__nav-item">
+                                <a href="{% url 'add_trailer' %}" class="header__nav-link">Add Movies</a>
+                            </li>
+                                     
+                            <li class="header__nav-item">
+                                <a href="{% url 'category' %}" class="header__nav-link">Category</a>
+                            </li>
+                            
+                                <li class="header__nav-item">
+                                    <a href="{% url 'profile_view' %}" class="header__nav-link">Profile</a>
+                                </li>
+                         
+                            
+                            </ul>
+                            <!-- end header nav -->
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header search -->
+            <form action="#" class="header__search">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="header__search-content">
+                                <input type="text" placeholder="Search for a movie, TV Series that you are looking for">
+                                <button type="button">search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- end header search -->
+        </header>
+        <!-- end header -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Trailer</title>
+</head>
+<body style="color: white;">
+   <div></div><br>
+   <div></div><br>
+<div class="container">
+    <h1 style="color: white;">Edit Trailer</h1>
+        <!-- Main content -->
+    <div class="row">
+        <div class="col-md-12">
+    <form method="post" enctype="multipart/form-data" style="color: rgb(255, 255, 255);">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="background-color: #007bff; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 4px;">Save Changes</button>
+    </form>
+
+    <!-- Link to Trailer Detail -->
+    <a href="{% url 'trailer_detail' trailer_id=trailer.id %}" style="text-decoration: none; color: white;">
+        View Trailer Details
+    </a>
+</body>
+
+</html>

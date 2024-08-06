@@ -1,0 +1,213 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600%7CUbuntu:300,400,500,700" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-grid.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nouislider.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/plyr.css' %}">
+    <link rel="stylesheet" href="{% static 'css/photoswipe.css' %}">
+    <link rel="stylesheet" href="{% static 'css/default-skin.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="{% static 'icon/favicon-32x32.png' %}" sizes="32x32">
+    <link rel="apple-touch-icon" href="{% static 'icon/favicon-32x32.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'icon/apple-touch-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'icon/apple-touch-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'icon/apple-touch-icon-144x144.png' %}">
+
+    <style>
+        body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #ffffff;
+    
+}
+        /* main.css */
+        .alert-success-custom {
+            color: white;
+            background-color: #28a745;
+            /* You can adjust the background color if needed */
+            border-color: #28a745;
+        }
+      
+    /* Style for form */
+    #add-trailer-form {
+        background-color: #25252b; /* Set background color */
+        color: white; /* Set text color */
+        padding: 20px; /* Add padding */
+    }
+
+    /* Style for label tags */
+    label {
+        color: white; /* Set label text color */
+    }
+
+    /* Style for form fields */
+    input[type="text"],
+    select,
+    textarea {
+        /* Add your custom styles here */
+        width: 100%; /* Example: Set width to 100% */
+        padding: 10px; /* Example: Add padding */
+        margin-bottom: 10px; /* Example: Add margin */
+        
+    }
+    element.style {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #000000;
+}
+    /* Add more styles as needed */
+
+    </style>
+
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Dmitry Volkov">
+    <title>FlixGo – Online Movies, TV Shows & Cinema HTML Template</title>
+
+</head>
+<body class="body">
+    <!-- header -->
+    <header class="header">
+        <div class="header__wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="header__content">
+                            <!-- header logo -->
+                            <a href="{% url 'home_view' %}" class="header__logo">
+                                <img src="{% static 'img/logo.svg' %}" alt="">
+                            </a>
+                            <!-- end header logo -->
+                            <!-- header nav -->
+                            <li class="header__nav-item">
+                                <a href="{% url 'home_view' %}" class="header__nav-link">Home</a>
+                            </li>
+                            <li class="header__nav-item">
+                                <a href="{% url 'add_trailer' %}" class="header__nav-link">Add Movies</a>
+                            </li>
+                                     
+                            <li class="header__nav-item">
+                                <a href="{% url 'category' %}" class="header__nav-link">Category</a>
+                            </li>
+                            
+                                <li class="header__nav-item">
+                                    <a href="{% url 'profile_view' %}" class="header__nav-link">Profile</a>
+                                </li>
+                         
+                            
+                            </ul>
+                            <!-- end header nav -->
+
+                                 <!-- header auth -->
+                                 <div class="header__auth">
+                            
+                                    <a href="#" class="header__sign-in" id="logoutButton">
+                                        <i class="icon ion-ios-log-in"></i>
+                                        <span>Logout</span>
+                                    </a>
+                                </div>
+                                <!-- end header auth -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header search -->
+            <form action="#" class="header__search">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="header__search-content">
+                                <input type="text" placeholder="Search for a movie, TV Series that you are looking for">
+                                <button type="button">search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- end header search -->
+        </header>
+        <!-- end header -->
+        
+<body>
+    <div></div><br>
+    <div class="container">
+        <div class="profile-header" style="text-align: center; margin: 20px 0;">
+            <h1>User Profile</h1>
+        </div>
+        
+        <div class="profile-container" style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #232121;">
+            <!-- Success Alert -->
+            {% if messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endif %}
+            
+            <div class="profile-item" style="margin: 10px 0;">
+                <span class="profile-label" style="font-weight: bold;">Username:</span> {{ user.username }}
+            </div>
+            <div class="profile-item" style="margin: 10px 0;">
+                <span class="profile-label" style="font-weight: bold;">First Name:</span> {{ user.first_name }}
+            </div>
+            <div class="profile-item" style="margin: 10px 0;">
+                <span class="profile-label" style="font-weight: bold;">Last Name:</span> {{ user.last_name }}
+            </div>
+            <div class="profile-item" style="margin: 10px 0;">
+                <span class="profile-label" style="font-weight: bold;">Email:</span> {{ user.email }}
+            </div>
+        
+            <div class="text-center">
+                <a href="{% url 'edit_profile_view' %}" class="btn btn-primary" style="background-color: #007bff; border: none; border-radius: 5px; padding: 10px 20px; font-size: 16px; cursor: pointer; color: white; text-decoration: none;">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            setTimeout(function(){
+                $(".alert").alert('close');
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
+<!-- JavaScript for logout confirmation popup -->
+<script>
+    document.getElementById("logoutButton").addEventListener("click", function(event) {
+        event.preventDefault(); // Prevent the default action (following the link)
+
+        // Show confirmation dialog
+        if (confirm("Are you sure you want to logout?")) {
+            // If user confirms, proceed with logout
+            window.location.href = "{% url 'signout' %}"; // Redirect to logout URL
+        }
+    });
+</script>
